@@ -315,8 +315,14 @@
         font-weight: 700;
         color: var(--gray-900);
         line-height: 1.25;
-        margin-bottom: 10px;
+        margin-bottom: 6px;
         letter-spacing: -0.5px;
+      }
+      .hero-info .product-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--gray-600);
+        margin-bottom: 14px;
       }
       .hero-info .subtitle {
         font-size: 1rem;
@@ -364,6 +370,20 @@
       .hero-info .hero-badge .badge-icon {
         font-size: 1rem;
       }
+      .hero-info .hero-badge.badge-strong {
+        border: none;
+        color: var(--white);
+        font-weight: 700;
+        font-size: 0.92rem;
+        padding: 10px 18px;
+        box-shadow: var(--shadow-md);
+      }
+      .hero-info .hero-badge.badge-strong.delivery {
+        background: var(--green);
+      }
+      .hero-info .hero-badge.badge-strong.pod {
+        background: var(--accent);
+      }
       .hero-info .cta-btn-lg {
         display: inline-block;
         background: var(--accent);
@@ -387,6 +407,9 @@
       @media (max-width: 768px) {
         .hero-info h1 {
           font-size: 1.5rem;
+        }
+        .hero-info .product-name {
+          font-size: 0.88rem;
         }
         .hero-info .price-tag .amount {
           font-size: 1.4rem;
@@ -743,7 +766,7 @@
         .form-group select,
         .form-group textarea {
           padding: 12px 14px;
-          font-size: 0.9rem;
+          font-size: 1rem;
         }
         .submit-btn {
           padding: 14px;
@@ -923,6 +946,64 @@
         }
       }
 
+      /* ============ STICKY MOBILE ORDER BAR ============ */
+      .mobile-sticky-cta {
+        display: none;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding-bottom: 72px;
+        }
+        .mobile-sticky-cta {
+          display: flex;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 1400;
+          background: var(--white);
+          border-top: 1px solid var(--gray-200);
+          box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.1);
+          padding: 10px 14px;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+        .mobile-sticky-cta .sticky-info {
+          display: flex;
+          flex-direction: column;
+          line-height: 1.25;
+          min-width: 0;
+        }
+        .mobile-sticky-cta .sticky-price {
+          font-weight: 700;
+          font-size: 0.95rem;
+          color: var(--gray-900);
+          white-space: nowrap;
+        }
+        .mobile-sticky-cta .sticky-tag {
+          font-size: 0.68rem;
+          font-weight: 600;
+          color: var(--green);
+          white-space: nowrap;
+        }
+        .mobile-sticky-cta .sticky-btn {
+          flex-shrink: 0;
+          background: var(--accent);
+          color: var(--white);
+          padding: 13px 24px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 0.92rem;
+          text-decoration: none;
+          white-space: nowrap;
+          box-shadow: 0 4px 14px rgba(232, 93, 4, 0.4);
+        }
+        .whatsapp-float {
+          bottom: 84px;
+        }
+      }
+
       /* ============ MISC ============ */
       .highlight-text {
         color: var(--accent);
@@ -952,7 +1033,10 @@
         <strong>Pay on Delivery within Lagos</strong> Available
       </span>
       <span class="divider"></span>
-      <span>🚚 Delivery: 3-10 business Days</span>
+      <span class="badge-row">
+        <span class="icon-circle">⚡</span>
+        <strong>Fast Lagos Delivery</strong> – 24–48 Hours
+      </span>
     </div>
 
     <!-- ==================== HEADER ==================== -->
@@ -960,6 +1044,15 @@
       <div class="logo">Smart<span>living</span></div>
       <a href="#order-form" class="cta-btn-sm">🛒 Order Now</a>
     </header>
+
+    <!-- ==================== STICKY MOBILE ORDER BAR ==================== -->
+    <div class="mobile-sticky-cta" id="mobileStickyCta">
+      <div class="sticky-info">
+        <span class="sticky-price">From ₦29,500</span>
+        <span class="sticky-tag">🚚 Free Delivery • 💳 Pay on Delivery</span>
+      </div>
+      <a href="#order-form" class="sticky-btn">Order Now</a>
+    </div>
 
     <!-- ==================== HERO SECTION ==================== -->
     <section class="hero">
@@ -1020,7 +1113,8 @@
 
           <!-- Hero Info -->
           <div class="hero-info">
-            <h1>Adjustable Alloy Laptop Stand</h1>
+            <h1>Work Comfortably Without Neck &amp; Back Strain</h1>
+            <p class="product-name">Adjustable Alloy Laptop Stand</p>
             <p class="subtitle">
               Ergonomic, lightweight, and built to last. Work smarter, feel
               better.
@@ -1030,10 +1124,10 @@
               <span class="amount">₦29,500</span>
             </div>
             <div class="hero-badges">
-              <span class="hero-badge"
-                ><span class="badge-icon">🚚</span> Free Delivery (Lagos)</span
+              <span class="hero-badge badge-strong delivery"
+                ><span class="badge-icon">🚚</span> FREE Delivery (Lagos)</span
               >
-              <span class="hero-badge"
+              <span class="hero-badge badge-strong pod"
                 ><span class="badge-icon">💳</span> Pay on Delivery</span
               >
               <span class="hero-badge"
@@ -1114,48 +1208,35 @@
           Click a package to select it & scroll to the order form
         </p>
         <div class="pricing-grid">
-          <!-- Basic Package -->
+          <!-- Single Unit -->
           <div
             class="pricing-card"
-            data-package="Basic"
-            onclick="selectPackage('Basic', 29500, this)"
+            data-package="Single"
+            onclick="selectPackage('Single', 29500, this)"
           >
-            <div class="package-name">Basic Package</div>
-
+            <div class="package-name">Single Unit</div>
+            <div class="package-desc">1 Laptop Stand</div>
             <div class="package-price">₦29,500</div>
             <ul class="package-includes">
-              <li>Buy 1 for 29,500</li>
+              <li>1 Adjustable Alloy Laptop Stand</li>
             </ul>
-            <button class="btn-select">Select Basic</button>
+            <button class="btn-select">Select Single Unit</button>
           </div>
 
-          <!-- Standard Package (Featured) -->
+          <!-- Double Package (Featured) -->
           <div
             class="pricing-card featured"
-            data-package="Standard"
-            onclick="selectPackage('Standard', 78500, this)"
+            data-package="Double"
+            onclick="selectPackage('Double', 50000, this)"
           >
-            <div class="package-name">Standard Package</div>
-            <div class="package-price">₦78,500</div>
+            <div class="package-name">Double Package</div>
+            <div class="package-desc">2 Laptop Stands – Best Value</div>
+            <div class="package-price">₦50,000</div>
             <ul class="package-includes">
-              <li>Buy 2 get 1 free for 78,500</li>
+              <li>2 Adjustable Alloy Laptop Stands</li>
+              <li>Save ₦9,000 vs buying separately</li>
             </ul>
-            <button class="btn-select">Select Standard</button>
-          </div>
-
-          <!-- Premium Package -->
-          <div
-            class="pricing-card"
-            data-package="Premium"
-            onclick="selectPackage('Premium', 108000, this)"
-          >
-            <div class="package-name">Premium Package</div>
-            <div class="package-desc">Stand + Pouch + Mouse Pad</div>
-            <div class="package-price">₦108,000</div>
-            <ul class="package-includes">
-              <li>Buy 3 get 1 free for 108,000</li>
-            </ul>
-            <button class="btn-select">Select Premium</button>
+            <button class="btn-select">Select Double Package</button>
           </div>
         </div>
       </div>
@@ -1227,14 +1308,11 @@
               >
               <select id="package" name="package" required>
                 <option value="">-- Choose a package --</option>
-                <option value="Basic - ₦29,500">
-                  Basic Package – (₦29,500)
+                <option value="Single Unit - ₦29,500">
+                  Single Unit – (₦29,500)
                 </option>
-                <option value="Standard - ₦78,500">
-                  Standard Package – (₦78,500)
-                </option>
-                <option value="Premium - ₦108,000">
-                  Premium Package – (₦108,000)
+                <option value="Double Package - ₦50,000">
+                  Double Package – (₦50,000)
                 </option>
               </select>
             </div>
@@ -1409,6 +1487,23 @@
         // Start autoplay
         autoPlayInterval = setInterval(nextSlide, 4500);
 
+        // ============ MOBILE STICKY ORDER BAR ============
+        const mobileStickyCta = document.getElementById("mobileStickyCta");
+        const orderFormSection = document.getElementById("order-form");
+        if (mobileStickyCta && orderFormSection && "IntersectionObserver" in window) {
+          const stickyObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                mobileStickyCta.style.display = entry.isIntersecting
+                  ? "none"
+                  : "";
+              });
+            },
+            { threshold: 0.15 },
+          );
+          stickyObserver.observe(orderFormSection);
+        }
+
         // ============ PACKAGE SELECTION ============
         window.selectPackage = function (packageName, price, cardElement) {
           // Highlight the clicked card
@@ -1420,9 +1515,8 @@
           // Set the select dropdown
           const packageSelect = document.getElementById("package");
           const valueMap = {
-            Basic: "Basic - ₦12,500",
-            Standard: "Standard - ₦16,500",
-            Premium: "Premium - ₦20,000",
+            Single: "Single Unit - ₦29,500",
+            Double: "Double Package - ₦50,000",
           };
           if (packageSelect && valueMap[packageName]) {
             packageSelect.value = valueMap[packageName];
@@ -1554,12 +1648,11 @@
             _captcha: "false",
           };
 
-          // ============================================
-          // CONFIGURATION: Replace the email below with
+        
           // your actual email address to receive orders.
           // The form uses FormSubmit.co (free service).
           // ============================================
-          const YOUR_EMAIL = "bossguyy15@gmail.com"; // <-- CHANGE THIS
+          const YOUR_EMAIL = "olowolafeeniola25@gmail.com"; // <-- CHANGE THIS
           const formSubmitURL = `https://formsubmit.co/ajax/${YOUR_EMAIL}`;
 
           try {
@@ -1579,7 +1672,7 @@
                 .querySelectorAll(".pricing-card")
                 .forEach((card) => card.classList.remove("featured"));
               document
-                .querySelector('.pricing-card[data-package="Standard"]')
+                .querySelector('.pricing-card[data-package="Double"]')
                 ?.classList.add("featured");
               document.getElementById("package").value = "";
               successModal.classList.add("active");
@@ -1635,7 +1728,7 @@
 
         // ============ WHATSAPP NUMBER CONFIG ============
         // Update the WhatsApp floating button number below
-        const whatsappNumber = "2349155890125"; // <-- CHANGE THIS to your WhatsApp number
+        const whatsappNumber = "2349155215568"; // <-- CHANGE THIS to your WhatsApp number
         const whatsappLink = document.querySelector(".whatsapp-float");
         if (whatsappLink && whatsappNumber) {
           whatsappLink.href = `https://wa.me/${whatsappNumber}?text=Hello%2C%20I%27m%20interested%20in%20the%20Adjustable%20Alloy%20Laptop%20Stand.%20Please%20tell%20me%20more.`;
